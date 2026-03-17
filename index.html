@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso Técnico em Informática - Bahia</title>
+
+  <!-- Bootstrap 5 + Bootstrap Icons + CSS customizado -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Fonte Google (opcional, para um visual mais limpo) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      scroll-behavior: smooth; /* scroll suave nativo (fallback) */
+      padding-top: 70px; /* espaçamento para navbar fixa */
+    }
+    /* Navbar fixa com sombra leve */
+    .navbar {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background-color: #ffffff !important;
+    }
+    /* Cores institucionais: azul e branco */
+    .bg-blue-light {
+      background-color: #f0f7ff; /* tom muito suave de azul para seções alternadas */
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #e9f0fa 0%, #ffffff 100%);
+      padding: 80px 0;
+    }
+    .section-title {
+      color: #0b3b5c; /* azul escuro institucional */
+      font-weight: 600;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #0d6efd;
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border: none;
+      border-radius: 20px;
+      background: white;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -10px rgba(0, 67, 156, 0.15) !important;
+    }
+    .icon-circle {
+      background-color: #e1ecfe;
+      color: #0b3b5c;
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .btn-azul {
+      background-color: #0b3b5c;
+      color: white;
+      border-radius: 40px;
+      padding: 12px 32px;
+      font-weight: 500;
+      transition: 0.2s;
+      border: none;
+    }
+    .btn-azul:hover {
+      background-color: #0a2e48;
+      color: white;
+      transform: scale(1.02);
+    }
+    footer {
+      background-color: #0b3b5c;
+      color: white;
+    }
+    footer a {
+      color: #cfdfff;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: white;
+    }
+    /* dropdown com leve animação (bootstrap já cuida do resto) */
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 16px;
+    }
+    /* navbar brand logo/texto */
+    .navbar-brand img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .navbar-brand span {
+      font-weight: 600;
+      color: #0b3b5c;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR FIXA COM DROPDOWNS ==================== -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-white">
+    <div class="container">
+      <!-- Logo governo + nome curso -->
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://www.ba.gov.br/educacao/modules/custom/bagov_base_blocks/assets/images/logo-governo-rodape.png" alt="Logo Governo Bahia">
+        <span class="ms-2 d-none d-sm-inline">Téc. Informática</span>
+      </a>
+
+      <!-- Botão hamburger para mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Itens do menu -->
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          
+          <!-- Início simples -->
+          <li class="nav-item">
+            <a class="nav-link" href="#hero">Início</a>
+          </li>
+
+          <!-- Sobre o Curso (dropdown) -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="sobreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sobre o Curso
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="sobreDropdown">
+              <li><a class="dropdown-item" href="#objetivo">🎯 Objetivo</a></li>
+              <li><a class="dropdown-item" href="#duracao">⏱️ Duração</a></li>
+            </ul>
+          </li>
+
+          <!-- Disciplinas (dropdown) -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="disciplinasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Disciplinas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="disciplinasDropdown">
+              <li><a class="dropdown-item" href="#disciplinas">📊 Banco de Dados</a></li>
+              <li><a class="dropdown-item" href="#disciplinas">🌐 Programação Web</a></li>
+              <li><a class="dropdown-item" href="#disciplinas">🧱 Programação Orientada a Objetos</a></li>
+              <li><a class="dropdown-item" href="#disciplinas">📡 Redes de Computadores</a></li>
+            </ul>
+          </li>
+
+          <!-- Contato direto (não dropdown) -->
+          <li class="nav-item">
+            <a class="nav-link" href="#contato">Contato</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== SEÇÃO HERO (início) ==================== -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="row align-items-center min-vh-50 py-5">
+        <div class="col-lg-8 mx-auto text-center">
+          <h1 class="display-3 fw-bold" style="color: #0b3b5c;">Técnico em Informática<br><span style="color: #0d6efd;">Integrado ao Ensino Médio</span></h1>
+          <p class="lead my-4">Formação profissional gratuita e de qualidade na Rede Estadual da Bahia. Destaque-se no mundo da tecnologia enquanto conclui o ensino médio.</p>
+          <a href="#sobre" class="btn btn-azul btn-lg">Saiba mais <i class="bi bi-arrow-right-short"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SOBRE O CURSO (objetivo + duração) ==================== -->
+  <section id="sobre" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Sobre o Curso</h2>
+      <div class="row g-4">
+        <!-- Objetivo (ícone) -->
+        <div class="col-md-6" id="objetivo">
+          <div class="card-hover p-4 h-100 shadow-sm">
+            <div class="icon-circle">
+              <i class="bi bi-bullseye"></i>
+            </div>
+            <h3 class="h4">Objetivo</h3>
+            <p class="text-secondary">Formar técnicos de nível médio em Informática, capacitados para desenvolver e manter sistemas, compreender infraestrutura de redes e atuar com ética e cidadania, integrando conhecimentos científicos e tecnológicos.</p>
+          </div>
+        </div>
+        <!-- Duração + modalidade e benefícios (ícone) -->
+        <div class="col-md-6" id="duracao">
+          <div class="card-hover p-4 h-100 shadow-sm">
+            <div class="icon-circle">
+              <i class="bi bi-calendar-check"></i>
+            </div>
+            <h3 class="h4">Duração & Modalidade</h3>
+            <p class="text-secondary"><i class="bi bi-clock-history me-2"></i>3 anos (integrado ao Ensino Médio).<br>
+            <i class="bi bi-briefcase me-2"></i>Modalidade presencial, com laboratórios equipados.<br>
+            <i class="bi bi-award me-2"></i>Certificação de Técnico em Informática + diploma de EM.</p>
+            <p class="mt-2"><span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">Gratuito</span> <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">Integral</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO DISCIPLINAS ==================== -->
+  <section id="disciplinas" class="py-5 bg-blue-light">
+    <div class="container">
+      <h2 class="section-title">Disciplinas Técnicas</h2>
+      <div class="row g-4">
+        <!-- Banco de Dados -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card-hover p-4 shadow-sm text-center h-100">
+            <div class="icon-circle mx-auto">
+              <i class="bi bi-database"></i>
+            </div>
+            <h4>Banco de Dados</h4>
+            <p class="text-secondary small">Modelagem, SQL, administração de bancos relacionais e noções de NoSQL.</p>
+          </div>
+        </div>
+        <!-- Programação Web -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card-hover p-4 shadow-sm text-center h-100">
+            <div class="icon-circle mx-auto">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <h4>Programação Web</h4>
+            <p class="text-secondary small">Front-end (HTML, CSS, JS) e back-end com PHP/Node, projetos completos.</p>
+          </div>
+        </div>
+        <!-- Programação Orientada a Objetos -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card-hover p-4 shadow-sm text-center h-100">
+            <div class="icon-circle mx-auto">
+              <i class="bi bi-diagram-3"></i>
+            </div>
+            <h4>Programação Orientada a Objetos</h4>
+            <p class="text-secondary small">Classes, herança, polimorfismo em Java/C#. Desenvolvimento de sistemas modulares.</p>
+          </div>
+        </div>
+        <!-- Redes de Computadores -->
+        <div class="col-md-6 col-lg-3">
+          <div class="card-hover p-4 shadow-sm text-center h-100">
+            <div class="icon-circle mx-auto">
+              <i class="bi bi-wifi"></i>
+            </div>
+            <h4>Redes de Computadores</h4>
+            <p class="text-secondary small">Arquitetura TCP/IP, protocolos, configuração de roteadores e segurança básica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO DIFERENCIAIS ==================== -->
+  <section id="diferenciais" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Diferenciais do Curso</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-cash-stack fs-1 text-primary"></i>
+            <div><h5>100% gratuito</h5> <p class="text-secondary">Mantido pelo Governo do Estado, sem mensalidades ou taxas.</p></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-mortarboard fs-1 text-primary"></i>
+            <div><h5>Integrado ao EM</h5> <p class="text-secondary">Conclua o ensino médio com uma profissão, tudo em um só currículo.</p></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-laptop fs-1 text-primary"></i>
+            <div><h5>Laboratórios atualizados</h5> <p class="text-secondary">Estrutura com computadores, kits de robótica e softwares profissionais.</p></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-people fs-1 text-primary"></i>
+            <div><h5>Corpo docente qualificado</h5> <p class="text-secondary">Professores especialistas e com experiência no mercado.</p></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-award fs-1 text-primary"></i>
+            <div><h5>Certificação reconhecida</h5> <p class="text-secondary">Diploma válido em todo território nacional e para concursos.</p></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex align-items-start gap-3 p-3">
+            <i class="bi bi-rocket fs-1 text-primary"></i>
+            <div><h5>Iniciação científica</h5> <p class="text-secondary">Projetos de pesquisa e extensão com fomento estadual.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO CONTATO (FORMULÁRIO) ==================== -->
+  <section id="contato" class="py-5 bg-blue-light">
+    <div class="container">
+      <h2 class="section-title">Fale com a gente</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="card shadow-sm border-0 rounded-4 p-4">
+            <form id="formContato" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! (modo demonstração)');">
+              <div class="mb-3">
+                <label for="nome" class="form-label fw-medium">Nome completo</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-white"><i class="bi bi-person"></i></span>
+                  <input type="text" class="form-control" id="nome" placeholder="Seu nome" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label fw-medium">E-mail</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+                  <input type="email" class="form-control" id="email" placeholder="nome@exemplo.com" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="mensagem" class="form-label fw-medium">Mensagem</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-white"><i class="bi bi-chat-dots"></i></span>
+                  <textarea class="form-control" id="mensagem" rows="4" placeholder="Gostaria de saber mais sobre..."></textarea>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-azul px-5 py-2 mt-2">Enviar mensagem <i class="bi bi-send ms-1"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== RODAPÉ ==================== -->
+  <footer class="pt-5 pb-4">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <img src="https://www.ba.gov.br/educacao/modules/custom/bagov_base_blocks/assets/images/logo-governo-rodape.png" alt="Governo da Bahia" style="height: 50px;" class="mb-3">
+          <p class="small opacity-75">Secretaria da Educação do Estado da Bahia<br>Curso Técnico em Informática Integrado ao Ensino Médio</p>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold">Institucional</h6>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-decoration-none opacity-75">Portal da Educação</a></li>
+            <li><a href="#" class="text-decoration-none opacity-75">Rede Estadual</a></li>
+            <li><a href="#" class="text-decoration-none opacity-75">Trabalhe conosco</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6 class="fw-bold">Redes sociais</h6>
+          <div class="d-flex gap-3 fs-5">
+            <a href="#" class="text-white opacity-75"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white opacity-75"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white opacity-75"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="text-white opacity-75"><i class="bi bi-twitter-x"></i></a>
+          </div>
+          <p class="small mt-3 opacity-50">créditos: projeto fictício</p>
+        </div>
+      </div>
+      <hr class="opacity-25">
+      <div class="text-center small opacity-75">© 2025 Governo da Bahia - Todos os direitos reservados. Layout moderno one page.</div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (para navbar toggle, dropdowns e rolagem suave via JS de fallback) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Scroll suave adicional para links internos com dropdown (garantia) -->
+  <script>
+    (function() {
+      // Suavizar scroll para todos os links que começam com #
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();  // Previne comportamento padrão
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            // opcional: fechar navbar em mobile
+            const navbarCollapse = document.getElementById('navbarMain');
+            if (navbarCollapse.classList.contains('show')) {
+              new bootstrap.Collapse(navbarCollapse).hide();
+            }
+          }
+        });
+      });
+    })();
+  </script>
+  <!-- Pequeno ajuste para header fixo (âncora não ficar escondida atrás da navbar) -->
+  <style>
+    /* Compensa altura da navbar fixa nas âncoras */
+    section {
+      scroll-margin-top: 70px;
+    }
+  </style>
+</body>
+</html>
